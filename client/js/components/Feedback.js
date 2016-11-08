@@ -15,10 +15,9 @@ var InitialFeedback = {
 };
 
 class Feedback extends Component {
-    //WHAT IS CONSTRUCTOR AND this.state DOING?
     constructor () {
     super();
-    this.state = " ";
+    this.state = InitialFeedback;
     }
   render() {
     return (

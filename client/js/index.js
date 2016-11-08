@@ -13,18 +13,13 @@ import App from './App';
 
 
 
-let store = createStore(reducers, applyMiddleware
-//WHY IS THIS THE SECOND PARAMATER OF THE STORE?
-	applyMiddleware	(
-    		thunkMiddleware, // lets us dispatch() functions
-    		loggerMiddleware // neat middleware that logs actions
-    )
-)
-
+const store = createStore(
+  reducers, {});
+//WHY IS THIS GIVING ME AN ERROR?
 store.subscribe(() = > {
-    console.log("store changed", store.getState())
+    console.log("store changed", store.getState()
 })
-
+//I don't have an AJAX action yet
 store.dispatch(AJAX-ACTION ('reactjs')).then(()=> 
 console.log(store.getState())
 )
