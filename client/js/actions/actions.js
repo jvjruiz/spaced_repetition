@@ -13,7 +13,8 @@ export const incrementCounter = () => {
 export const START_GAME = 'START_GAME'
 export const startGame = () => {
   return {
-    type: START_GAME
+    type: START_GAME,
+    payload:false
   }
 }
 
@@ -30,7 +31,9 @@ export const currentQuestion = () => {
 export const FEEDBACK = 'FEEDBACK'
 export const Feedback = () => {
   return {
-    type: FEEDBACK
+    type: FEEDBACK,
+    payload: false,
+    type: " "
   }
 }
 
