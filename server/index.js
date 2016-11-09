@@ -4,9 +4,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
 import bodyParser from 'body-parser';
-//MODELS might not need this sectionm
+import errorHandler from 'errorhandler';
+//MODELS might not need this section
 import user from '../models/user'
-import question from '../models/question'
 //ROUTES
 import userEndpoints from './userEndpoints';
 import questionEndpoints from './questionEndpoints';
@@ -21,10 +21,12 @@ app.use(jsonParser);
 //CREATE MODEL
 var models = {}
 models.user = mongoose.model('User', require('../models/user'));
-models.question = mongoose.model('Question', require('../models/question'));
+
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 //CREATE MIDDLEWARE 
 var middleware = {}
+//REGISTER PARAMS
+//if have a lot of params, can use this section to load a file up
 //REGISTER ROUTES
 require('./userEndpoints.js')(app,models,middleware)
 require('./questionEndpoints.js')(app,models,middleware)
