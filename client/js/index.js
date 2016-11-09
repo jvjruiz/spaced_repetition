@@ -23,6 +23,6 @@ store.subscribe(() => {
 // store.dispatch(AJAX-ACTION ('reactjs')).then(()=> 
 // console.log(store.getState())
 // )
-
+export default store;
 Reactdom.render(<App/>, document.getElementById('app'));
 

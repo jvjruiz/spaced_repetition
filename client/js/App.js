@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Counter from './components/Counter';
 import Questions from './components/Questions';
 import Login from './components/Loginpage';
+import StartGameButton from './components/StartGame';
 
 
 class App extends Component {
   render() {
     return (
       <div className="app">
+      <StartGameButton/>
       <Login />
       <Counter />
       <Questions />

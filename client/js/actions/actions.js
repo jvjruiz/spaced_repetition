@@ -13,8 +13,7 @@ export const incrementCounter = () => {
 export const FEEDBACK = 'FEEDBACK';
 export const Feedback = () => {
   return {
-    type: FEEDBACK,
-    payload: false,
+    type: FEEDBACK
   };
 };
 
@@ -31,8 +30,7 @@ export const SubmitBox = () => {
 export const QUESTION_CORRECT = 'QUESTION_CORRECT';
 export const QuestionCorrect = () => {
   return{
-    type: QUESTION_CORRECT,
-    payload: false
+    type: QUESTION_CORRECT
   };
 };
 
@@ -40,8 +38,7 @@ export const QuestionCorrect = () => {
 export const LOG_IN_BUTTON = 'LOG_IN_BUTTON';
 export const LogInButton = () => {
   return {
-    type: LOG_IN_BUTTON,
-    payload: false
+    type: LOG_IN_BUTTON
   };
 };
 
