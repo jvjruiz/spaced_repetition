@@ -1,5 +1,55 @@
 require('isomorphic-fetch');
 
+//ACTION TO LOG THE USER IN **** ASYNC
+export const LOG_USER_IN = "LOG_USER_IN";
+export const logUserIn = function (userId) {
+  return dispatch => {
+    return fetch('users/' + userId, function callback(res){
+      dispatch(loginInSuccess(res.json())),
+      dispatch(currentUser())
+    })
+  }
+};
+
+
+//******************************ACTION IF USER LOG IN IS SUCCESSFUL
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const loginInSuccess = (payload) => {
+  return {
+    type: LOG_IN_SUCCESS,
+    payload: payload
+  };
+};
+
+//**********************************ACTION TO SHOW WHAT USER IS LOGGED IN
+export const CURRENT_USER = 'CURRENT_USER';
+export const currentUser = function (userId) {
+  return dispatch => {
+    return fetch('/api/questions/nextquestion' + userId, function callback(res){
+      dispatch(StartGame())
+    })
+  }
+};
+
+
+//ACTION IF USER LOG IN FAILED MISERABLY
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const logInFailure = (error) => {
+  return {
+    type: LOG_IN_FAILURE,
+    payload: error
+  };
+};
+
+//ACTION TO START THE GAME 
+export const START_GAME = 'START_GAME';
+export const StartGame = (userId) => {
+  console.log('startGame actions calleds');
+  return {
+   type: START_GAME
+  };
+} ;
+
 
 //ACTION TO INCREASE SCORE
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
@@ -21,8 +71,40 @@ export const Feedback = () => {
 export const SUBMIT_BOX = 'SUBMIT_ BOX';
 export const SubmitBox = () => {
   return {
-    type: SUBMIT_BOX,
-    payload: false
+    type: SUBMIT_BOX
+  };
+};
+
+//ACTION IF THE SUBMITTED ANSWER IS SUCCESSFUL
+export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
+export const submitAnswerSuccess = (userId) => {
+    return dispatch => {
+    return fetch('/api/questions/nextquestion/' + userId, function callback(res){
+      dispatch(questionSuccess(res.json()));
+      dispatch(Feedback());
+    })
+  }
+};
+
+//ACTION IF THE SUBMITTED ANSWER FAILED
+export const SUBMIT_ANSWER_FAILURE = 'SUBMIT_ANSWER_FAILURE';
+export const submitAnswerFailure = (error) => {
+  return {
+    type: SUBMIT_ANSWER_FAILURE,
+    payload: error
+  };
+};
+
+//ACTION TO submit answer *****ASYNC 
+export const SUMBIT_ANSWER = 'SUBMIT_ANSWER';
+export const submitAnswer = function (userId, iscorrect) {
+  return dispatch => {
+    return fetch('/api/questions/' + userId,{method: 'POST',
+      body:{
+        iscorrect: iscorrect
+      }}).then(function (res) {
+      dispatch(submitAnswerSuccess(res.json()));
+    });
   };
 };
 
@@ -34,40 +116,6 @@ export const QuestionCorrect = () => {
   };
 };
 
-//ACTION TO SHOW BUTTON TO LOG IN
-export const LOG_IN_BUTTON = 'LOG_IN_BUTTON';
-export const LogInButton = () => {
-  return {
-    type: LOG_IN_BUTTON
-  };
-};
-
-//ACTION TO SHOW WHAT USER IS LOGGED IN
-export const CURRENT_USER = 'CURRENT_USER';
-export const CurrentUser = () => {
-  return {
-    type: CURRENT_USER,
-    payload: false
-  };
-};
-
-//ACTION IF THE SUBMITTED ANSWER IS SUCCESSFUL
-export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
-export const submitAnswerSuccess = (payload) => {
-  return {
-    type: SUBMIT_ANSWER_SUCCESS,
-    payload: payload
-  };
-};
-
-//ACTION IF THE SUBMITTED ANSWER FAILED
-export const SUBMIT_ANSWER_FAILURE = 'SUBMIT_ANSWER_FAILURE';
-export const submitAnswerFailure = (error) => {
-  return {
-    type: SUBMIT_ANSWER_FAILURE,
-    payload: error
-  };
-};
 
 //ACTION IF THE QUESTION RECIEVED SUCCESSFULLY
 export const QUESTION_SUCCESS = 'QUESTION_SUCCESS';
@@ -86,57 +134,23 @@ export const questionFailure = (error) => {
   };
 };
 
-//ACTION IF USER LOG IN IS SUCCESSFUL
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const loginInSuccess = (payload) => {
-  return {
-    type: LOG_IN_SUCCESS,
-    payload: payload
-  };
-};
-//ACTION IF USER LOG IN FAILED MISERABLY
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
-export const logInFailure = (error) => {
-  return {
-    type: LOG_IN_FAILURE,
-    payload: error
-  };
-};
-
-
-//ACTION TO START THE GAME 
-export const START_GAME = 'START_GAME';
-export const StartGame = (userId) => {
-  return {
-   type: START_GAME
-  };
-} ;
-
 //ACTION TO GET CURRENT QUESTION ***** ASYNC
 export const CURRENT_QUESTION = 'CURRENT_QUESTION';
 export const CurrentQuestion = function (userId) {
-  return fetch('api/questions/' + userId).then(function callback(res){
-    dispatch(questionSuccess(res.json()))
-  });
-};
-
-
-//ACTION TO LOG THE USER IN **** ASYNC
-export const LOG_USER_IN = "LOG_USER_IN";
-export const logUserIn = function (userId) {
-  return fetch('users/' + userId, function callback(res){
-    dispatch
-  });
-};
-//ACTION TO submit answer *****ASYNC 
-export const SUMBIT_ANSWER = 'SUBMIT_ANSWER';
-export const submitAnswer = function (userId) {
   return dispatch => {
-    return fetch('users/' + userId).then(function callback(res){
-      dispatch(submitAnswerSuccess(res.json()));
+    return fetch('api/questions/nextquestion/' + userId).then(function callback(res){
+      dispatch(questionSuccess(res.json()))
     });
-  };
+  }
 };
+
+
+//waiting for oauth login
+// for main page 'https://space-repetition-app-michellen.c9users.io/'
+// for next question '/api/questions/nextquestion/:userId'
+// To submit answer to database '/api/questions/:userId'
+
+
 
 //AJAX CALL TO GET SUBREDDIT
 // export const fetchVideo = () => {

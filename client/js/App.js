@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
+import StartGameButton from './components/StartGame';
+
 import Counter from './components/Counter';
 import Questions from './components/Questions';
-import Login from './components/Loginpage';
-import StartGameButton from './components/StartGame';
+import Homepage from './components/Homepage';
+// remmeber to import Game component
 
 
 class App extends Component {
+  
   render() {
+    if (!this.props.currentUser) {
+      return(
+        <div>
+          <Homepage />
+        </div>
+      );
+    }
+    
     return (
-      <div className="app">
-      <StartGameButton/>
-      <Login />
-      <Counter />
-      <Questions />
-      
+      <div>
+      <Game user={this.props.currentUser} />
+      <StartGameButton />
       </div>
     );
   }
