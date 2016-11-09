@@ -14,15 +14,15 @@ import App from './App';
 
 
 const store = createStore(
-  reducers, {});
+  reducers, applyMiddleware(thunk));
 //WHY IS THIS GIVING ME AN ERROR?
-store.subscribe(() = > {
-    console.log("store changed", store.getState()
+store.subscribe(() => {
+    console.log("store changed", store.getState())
 })
 //I don't have an AJAX action yet
-store.dispatch(AJAX-ACTION ('reactjs')).then(()=> 
-console.log(store.getState())
-)
+// store.dispatch(AJAX-ACTION ('reactjs')).then(()=> 
+// console.log(store.getState())
+// )
 
 Reactdom.render(<App/>, document.getElementById('app'));
 
