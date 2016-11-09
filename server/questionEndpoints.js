@@ -20,7 +20,7 @@ module.exports = function(app,models,middleware) {
     
     app.post('/api/questions/:userId/:isCorrect', function(req,res,next) {
         var userId = req.params.userId
-        var isCorrect = req.params.isCorrect === "true";
+        var isCorrect = req.body.isCorrect === true;
         models.user
             .findById(userId,function(err, user) {
                 if(err) return next(err)
