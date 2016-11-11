@@ -28,16 +28,16 @@ var middleware = {}
 //REGISTER PARAMS
 //if have a lot of params, can use this section to load a file up
 //REGISTER ROUTES
-require('./userEndpoints.js')(app,models,middleware)
-require('./questionEndpoints.js')(app,models,middleware)
+require('./userEndpoints.js')(app,models,middleware);
+require('./questionEndpoints.js')(app,models,middleware);
 
 var runServer = function(callback) {
-    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spaced_repetition')
+    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spaced_repetition');
     var port = process.env.PORT || 8080;
     var server = app.listen(port, function() {
         console.log('Listening on localhost:' + port);
         if (callback)callback(server);
-    })
+    });
 };
 
 if (require.main === module) {

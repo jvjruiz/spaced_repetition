@@ -1,9 +1,9 @@
 import {createStore} from "redux";
 import {LOG_IN_BUTTON} from '../actions/actions'
 import {LOG_IN_SUCCESS} from '../actions/actions';
-import {CURRENT_USER} from '../actions/actions'
-import {START_GAME} from '../actions/actions'
-import {QUESTION_SUCCESS} from '../actions/actions'
+import {CURRENT_USER} from '../actions/actions';
+import {START_GAME} from '../actions/actions';
+import {QUESTION_SUCCESS} from '../actions/actions';
 import {QUESTION_CORRECT} from '../actions/actions';
 import {FEEDBACK} from '../actions/actions';
 import {LOG_IN_FAILURE} from '../actions/actions';
@@ -22,6 +22,7 @@ const initialState = {
     
 };
 const reducers = function (state = initialState ,action) {
+    var newState 
     function assignState(newState){
       return Object.assign({}, state, newState);
     } 
@@ -29,7 +30,7 @@ const reducers = function (state = initialState ,action) {
         case LOG_IN_SUCCESS:
             return assignState({
                 logInSuccess: action.payload
-            });
+            })
         case LOG_IN_FAILURE: 
             return assignState({
                 logInFailure: action.error
@@ -54,14 +55,15 @@ const reducers = function (state = initialState ,action) {
 // 			return assignState ({
 // 				currentAnswerInput: action.answer
 // 			});
-
-			if(newState.correctAnswer.toString().toLowerCase() === newState.currentAnswerInput.toString().toLowerCase()) {
+            console.log("This is the user's answer " + action.payload)
+            console.log("This is something else" + state.currentQuestion.answer)
+			if(action.payload.toString().toLowerCase() === state.currentQuestion.answer.toString().toLowerCase()) {
 				newState = Object.assign({}, state, {
 					currentAnswerInput: action.answer,
 					currentFeedback: 'Correct!',
 					isCorrect: true,
 					showNextQuestionButton: true
-				})
+				});
 			}	
 			else {
 				newState = Object.assign({}, state, {
@@ -69,7 +71,7 @@ const reducers = function (state = initialState ,action) {
 					currentFeedback: 'Incorrect, please try again.',
 					isCorrect: false,
 					showNextQuestionButton: true
-				})
+				});
 			}
 			return newState;
 		
@@ -86,10 +88,10 @@ const reducers = function (state = initialState ,action) {
 const counter = (state = initialState, action) => {
   switch (action.type) {
     case 'QUESTION_CORRECT':
-      return Object.assign({}, state, { count: state.count + 1 })
+      return Object.assign({}, state, { count: state.count + 1 });
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducers
+export default reducers;

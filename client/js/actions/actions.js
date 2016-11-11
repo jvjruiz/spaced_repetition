@@ -1,4 +1,4 @@
-require('isomorphic-fetch');
+var fetch =require('isomorphic-fetch');
 
 //ACTION TO LOG THE USER IN **** ASYNC
 export const LOG_USER_IN = "LOG_USER_IN";
@@ -80,7 +80,7 @@ export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
 export const submitAnswerSuccess = (userId) => {
     return dispatch => {
     return fetch('/api/questions/nextquestion/' + userId, function callback(res){
-      dispatch(questionSuccess(res.json()));
+      dispatch(questionSuccess(userId));
       dispatch(Feedback());
     });
   };
@@ -96,25 +96,32 @@ export const submitAnswerFailure = (error) => {
 };
 
 //ACTION TO submit answer *****ASYNC 
-export const SUMBIT_ANSWER = 'SUBMIT_ANSWER';
-export const submitAnswer = function (userId, iscorrect) {
+export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
+export const submitAnswer = function (userId, isCorrect) {
   return dispatch => {
+  
     return fetch('/api/questions/' + userId,{
       method: 'POST',
-      body:{
-        iscorrect: iscorrect
-      }}).then(function (res) {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        isCorrect: isCorrect
+      })
+    }).then(function (res) {
         console.log(res)
-      dispatch(submitAnswerSuccess(res.json()));
+      dispatch(submitAnswerSuccess(userId));
     });
   };
 };
 
 export const USER_ANSWER = 'USER_ANSWER';
 export const userAnswer = function (answer) {
+	console.log('inside of action')
 	return {
 		type: USER_ANSWER,
-		answer: answer
+		payload: answer
 	}
 }
 
@@ -132,7 +139,6 @@ export const QuestionCorrect = (text) => {
 //ACTION IF THE QUESTION RECIEVED SUCCESSFULLY
 export const QUESTION_SUCCESS = 'QUESTION_SUCCESS';
 export const questionSuccess = (payload) => {
-  console.log(payload)
   return {
     type: QUESTION_SUCCESS,
     payload: payload
@@ -154,9 +160,7 @@ export const CurrentQuestion = function (userId) {
     return fetch('api/questions/nextquestion/' + userId)
     .then(function(response, error) {
      return response.json();
-     console.log("1st response" + response)
     }).then(function(response) {
-      console.log("2nd response" + response)
       return dispatch(questionSuccess(response))
     });
   }

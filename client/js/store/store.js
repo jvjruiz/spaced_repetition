@@ -16,7 +16,7 @@ const store = createStore(
   reducers, applyMiddleware(thunk));
 
 store.subscribe(() => {
-    console.log("store changed", store.getState());
+   
 });
 
 //I don't have an AJAX action yet

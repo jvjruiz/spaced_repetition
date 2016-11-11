@@ -3,27 +3,22 @@ import questionSuccess from '../actions/actions';
 import { CurrentQuestion } from '../actions/actions';
 import React, { Component } from 'react';
 import { submitAnswer } from '../actions/actions';
-import {userAnswer} from '../actions/actions'
-import { connect } from 'react-redux'
+import {userAnswer} from '../actions/actions';
+import { connect } from 'react-redux';
 var router = require('react-router');
 var Link = router.Link;
 
 
 class Questions extends Component {
-  onButtonClick() {
-    console.log(this.props)
-    this.props.submitAnswer;
-  }
-  ontheSubmit (event) {
+  submitAnswer (event) {
         event.preventDefault();
-        
-        this.props.onAddSubmit(this.refs.answerInput.value);
-        console.log(this.props.name)
-        this.props.submitAnswer;
+        console.log(this.refs.answerInput.value)
+        this.props.checkAnswer(this.refs.answerInput.value);
+        this.props.updateQueue(this.props.currentId, this.props.isCorrect);
         this.refs.answerInput.value = "";
+        
    }
   componentWillMount(){
-    console.log(this.props)
         this.props.currentQuestion1(this.props.currentId);
   }
   render() {
@@ -31,13 +26,14 @@ class Questions extends Component {
         <div className="App-Questions">
           <h3> Japanese word {this.props.currentQuestion.question}</h3>
           <h3> Translate the Japanese word to English </h3>
-          <form onSubmit={this.ontheSubmit}>
+
+          <form >
               <input type="text" ref="answerInput" />
-              <Link to={'/feedback'}>
-              <button type ='button'><h3>Submit Answer</h3></button>
-              </Link> 
-              
+              <button type ='submit' onClick={this.submitAnswer.bind(this)}><h3>Submit Answer</h3></button>
           </form>
+            <Link to={'/feedback'}>
+              <h3>Go to feedback</h3>
+            </Link>
         </div>
     );
   }
@@ -45,28 +41,28 @@ class Questions extends Component {
 
 //pulls from the state
 const mapStateToProps = (state) => {
-  console.log("this is the state" + state)
-  return {
-    name: state.name,
-    currentId: state.userId,
-    currentQuestion: state.currentQuestion
-    
-  };
+    return {
+      name: state.name,
+      currentId: state.userId,
+      currentQuestion: state.currentQuestion
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddSubmit: function(answerInput) {
-            dispatch(userAnswer(answerInput));
+        checkAnswer: function(answerInput) {
+            dispatch(userAnswer(answerInput))
         },
         currentQuestion1: function(userId) {
-            dispatch(CurrentQuestion(userId))
+            dispatch(CurrentQuestion(userId));
         },
-        submitAnswer : function (userId) {
-          dispatch(submitAnswer(this.props.currrentId, true))
+        updateQueue : function (userId, isCorrect) {
+          dispatch(submitAnswer(userId, isCorrect));
         }
-    }
-}
+    };
+};
+
+//
 
 //dispatchs an action that calls the reducer (called 'dispatch to props' because it's not mutating the state)
 // const mapDispatchToProps = (dispatch) => {

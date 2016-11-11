@@ -29,8 +29,8 @@ function seedData() {
             answer: "no not yet",
         },
         {
-            question: "meurtre",
-            answer: "murder",
+            question: "Kawaii",
+            answer: "cute",
         },
         {
             question: "Sayonara",
