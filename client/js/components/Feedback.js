@@ -17,7 +17,7 @@ class Feedback extends Component {
      render() {
         return (
             <div className="App-Feedback">
-            <h1>{this.props.isCorrect ? "Yay" : "Boooo"}</h1>
+            <h1 className = "correct">{this.props.isCorrect ? "Yay" : "Boooo"}</h1>
                 <Link to={'/questions'}>
                   <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>Next Question </h1></button>
                 </Link>
