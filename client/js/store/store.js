@@ -4,12 +4,8 @@ import reducers from '../reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-/*
-example state:
-  {
-    currentUserId: 'sejf7843tberf', 
-  }
-*/
+var actions = require('../actions/actions')
+var currentQuestion = actions.CurrentQuestion
 
 
 const store = createStore(
@@ -19,9 +15,6 @@ store.subscribe(() => {
     console.log("store changed", store.getState());
 });
 
-//I don't have an AJAX action yet
-// store.dispatch(AJAX-ACTION ('reactjs')).then(()=> 
-// console.log(store.getState())
-// )
+store.dispatch(currentQuestion)
 
 export default store;

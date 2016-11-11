@@ -10,15 +10,14 @@ import {LOG_IN_FAILURE} from '../actions/actions';
 import {USER_ANSWER} from '../actions/actions';
 
 const initialState = {
-    isUserVisable: false,
+    isUserVisible: false,
     userId: "5824d613ad04c481507a6b84",
     isQuestionVisible: false,//boolean in state for question transition (if true, I don't want to render anything but feedback)
     currentQuestion: {},
     currentUser: null,
     counter: 0,
     isCorrect: false,
-    questions : {},
-    currentAnswerInput: null
+    currentAnswerInput: ''
     
 };
 const reducers = function (state = initialState ,action) {
@@ -36,7 +35,7 @@ const reducers = function (state = initialState ,action) {
             });
         case CURRENT_USER: 
             return assignState({
-               isUserVisable: true 
+               isUserVisible: true 
             });
         case START_GAME:
             return assignState({
@@ -50,28 +49,28 @@ const reducers = function (state = initialState ,action) {
             return assignState({
                 isCorrect: action.isCorrect
             });
-        case USER_ANSWER:
-// 			return assignState ({
-// 				currentAnswerInput: action.answer
-// 			});
+//         case USER_ANSWER:
+// // 			return assignState ({
+// // 				currentAnswerInput: action.answer
+// // 			});
 
-			if(newState.correctAnswer.toString().toLowerCase() === newState.currentAnswerInput.toString().toLowerCase()) {
-				newState = Object.assign({}, state, {
-					currentAnswerInput: action.answer,
-					currentFeedback: 'Correct!',
-					isCorrect: true,
-					showNextQuestionButton: true
-				})
-			}	
-			else {
-				newState = Object.assign({}, state, {
-					currentAnswerInput: action.answer,
-					currentFeedback: 'Incorrect, please try again.',
-					isCorrect: false,
-					showNextQuestionButton: true
-				})
-			}
-			return newState;
+// 			if(newState.correctAnswer.toString().toLowerCase() === newState.currentAnswerInput.toString().toLowerCase()) {
+// 				newState = Object.assign({}, state, {
+// 					currentAnswerInput: action.answer,
+// 					currentFeedback: 'Correct!',
+// 					isCorrect: true,
+// 					showNextQuestionButton: true
+// 				})
+// 			}	
+// 			else {
+// 				newState = Object.assign({}, state, {
+// 					currentAnswerInput: action.answer,
+// 					currentFeedback: 'Incorrect, please try again.',
+// 					isCorrect: false,
+// 					showNextQuestionButton: true
+// 				})
+// 			}
+// 			return newState;
 		
         default:
             return state;

@@ -1,4 +1,4 @@
-require('isomorphic-fetch');
+var fetch = require('isomorphic-fetch');
 
 //ACTION TO LOG THE USER IN **** ASYNC
 export const LOG_USER_IN = "LOG_USER_IN";
