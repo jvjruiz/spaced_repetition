@@ -1,15 +1,19 @@
 import Mongoose from 'mongoose';
+import {seedData} from '../server/factory_functions/seed-data'
 
 const UserSchema = new Mongoose.Schema({
-    email: {
+    name: {
+      type: String,
+      required: true,
+    },
+    googleToken: {
         type: String,
         required: true,
         unique: true
     },
     token: {
         type:String,
-        required: false
-        //to be changed to true once authentication is up and running
+        required: true
     },
     questionQueue: [{
         question: String,
@@ -17,6 +21,22 @@ const UserSchema = new Mongoose.Schema({
         weight: Number
     }]
 });
+
+UserSchema.statics.findOrCreate = function(googleId, accessToken, callback) {
+    this.findOne({googleId}, function(err,user) {
+        if(err) return callback(err);
+        if(!user) {
+            this.create({googleId: googleId, token: accessToken, queue:seedData()},
+                function(err, user) {
+                    if(err) return callback(err);
+                        return callback(null,user)
+                })
+            }
+        return callback(null,user);
+    })
+}
+
+
 
 module.exports = UserSchema;
 

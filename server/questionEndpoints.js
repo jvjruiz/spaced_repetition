@@ -18,7 +18,7 @@ module.exports = function(app,models,middleware) {
             })
     })
     
-    app.post('/api/questions/:userId/:isCorrect', function(req,res,next) {
+    app.post('/api/questions/:userId/', function(req,res,next) {
         var userId = req.params.userId
         var isCorrect = req.body.isCorrect === true;
         models.user

@@ -1,7 +1,8 @@
 var seedData = require('./factory_functions/seed-data.js')
-
+var passport = require('passport')
 module.exports = function(app,models,middleware) {
-    app.get('/api/users', function(req,res,next) {
+    app.get('/api/users', passport.authenticate('bearer', {session:false}), 
+    function(req,res,next) {
         models.user
             .find({}, function(err, users) {
               res.status(200).json(users)  
