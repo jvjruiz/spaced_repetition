@@ -15,6 +15,7 @@ module.exports = function(app,models,middleware) {
         models.user 
             .findById(userId, function(err, user) {
                 if(err) return res.status(500).json(err);
+                console.log(user.questionQueue)
                 return res.json(user.questionQueue[0]);
             });
     });
@@ -32,7 +33,7 @@ module.exports = function(app,models,middleware) {
                     question.weight *= 2;
                 }
                 else {
-                    question.weight = 1;
+                    question.weight = 2;
                 }
                 if(question.weight >= user.questionQueue.length) {
                     user.questionQueue.push(question);
@@ -42,7 +43,7 @@ module.exports = function(app,models,middleware) {
                 }
                 user.save(function(err) {
                     if(err) return res.status(500).json(err);
-                    return res.sendStatus(204);
+                    return res.sendStatus(204)
                 });
             });
     });

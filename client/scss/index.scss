@@ -23,7 +23,7 @@ input[type=text]{
   height: 36px;
   width: 300px;
   padding-left: 30px;
-
+//he :focus CSS pseudo-class is applied when an element has received focus, either from the user selecting it with the use of a keyboard or by activating with the mouse (e.g. a form input).
   &:focus{
     box-shadow: 0 1px 0 #2392F3 inset, 0 -1px 0 #2392F3 inset, 1px 0 0 #2392F3 inset, -1px 0 0 #2392F3 inset, 0 0 4px rgba(35,146,243,0.5);
     outline: none;
@@ -77,46 +77,12 @@ div.foo {
   font-size: 8em;
   margin: 0.1em;
   position: relative;
-  color: #e93d00;
+  color: #60ffc5;
   transform-style: preserve-3d;
   perspective: 400;
   z-index: 1;
 }
 
-.letter:before, .letter:after {
-  position: absolute;
-  content: attr(data-letter);
-  transform-origin: top left;
-  top: 0;
-  left: 0;
-}
-
-.letter, .letter:before, .letter:after {
-  transition: all 3s ease-in-out;
-}
-
-.letter:before {
-  color: #60ffc5;
-  text-shadow: -1px 0px 1px rgba(255, 255, 255, .8),
-  1px 0px 1px rgba(0, 0, 0, .8);
-  z-index: 3;
-  transform: rotateX(0deg) rotateY(-15deg) rotateZ(0deg);
-}
-
-.letter:after {
-  color: rgba(0, 0, 0, .11);
-  z-index: 2;
-  transform: scale(1.08, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 1deg);
-}
-
-.letter:hover:before {
-  color: #60ffc5;
-  transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
-}
-
-.letter:hover:after {
-  transform: scale(1.08, 1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg, 22deg);
-}
 
 a {
   position: relative;
@@ -180,6 +146,7 @@ a:focus {
 }
 
 .button a span:last-child {
+  height: 6px;
   z-index: 1;
   display: block;
   padding: 8px 0 0 0;
@@ -189,34 +156,11 @@ a:focus {
   font-style: italic;
   font-size: 0.75em;
   font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   -moz-transition: -moz-transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
-  -webkit-transform: translateY(-100%);
-  -moz-transform: translateY(-100%);
-  transform: translateY(-100%);
-}
-
-.button a:hover::before,
-.button a:focus::before {
-  height: 6px;
-}
-
-.button a:hover::before,
-.button a:hover::after,
-.button a:focus::before,
-.button a:focus::after {
-  opacity: 1;
-  -webkit-transform: translateY(0px);
+   -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
   transform: translateY(0px);
-}
-
-.button a:hover span:last-child,
-.button a:focus span:last-child {
-  opacity: 1;
-  -webkit-transform: translateY(0%);
-  -moz-transform: translateY(0%);
-  transform: translateY(0%);
 }

@@ -12,7 +12,6 @@ var Link = router.Link;
 class Questions extends Component {
   submitAnswer (event) {
         event.preventDefault();
-        console.log(this.refs.answerInput.value)
         this.props.checkAnswer(this.refs.answerInput.value);
         this.props.updateQueue(this.props.currentId, this.props.isCorrect);
         this.refs.answerInput.value = "";
