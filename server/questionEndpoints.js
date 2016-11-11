@@ -21,6 +21,7 @@ module.exports = function(app,models,middleware) {
     });
     
     app.post('/api/questions/:userId/', function(req,res,next) {
+
         console.log(req.body)
         var userId = req.params.userId;
         var isCorrect = req.body.isCorrect === true;

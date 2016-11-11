@@ -23,8 +23,8 @@ class Questions extends Component {
   render() {
     return (
         <div className="App-Questions">
-          <h3> Japanese word {this.props.currentQuestion.question}</h3>
-          <h3> Translate the Japanese word to English </h3>
+          <h2> Japanese word {this.props.currentQuestion.question}</h2>
+          <h4> Translate the Japanese word to English </h4>
 
           <form >
               <input type="text" ref="answerInput" />
