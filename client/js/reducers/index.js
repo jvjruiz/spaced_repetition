@@ -10,15 +10,14 @@ import {LOG_IN_FAILURE} from '../actions/actions';
 import {USER_ANSWER} from '../actions/actions';
 
 const initialState = {
-    isUserVisable: false,
+    isUserVisible: false,
     userId: "5824d613ad04c481507a6b84",
     isQuestionVisible: false,//boolean in state for question transition (if true, I don't want to render anything but feedback)
     currentQuestion: {},
     currentUser: null,
     counter: 0,
     isCorrect: false,
-    questions : {},
-    currentAnswerInput: null
+    currentAnswerInput: ''
     
 };
 const reducers = function (state = initialState ,action) {
@@ -37,7 +36,7 @@ const reducers = function (state = initialState ,action) {
             });
         case CURRENT_USER: 
             return assignState({
-               isUserVisable: true 
+               isUserVisible: true 
             });
         case START_GAME:
             return assignState({
@@ -51,10 +50,9 @@ const reducers = function (state = initialState ,action) {
             return assignState({
                 isCorrect: action.isCorrect
             });
+
         case USER_ANSWER:
-// 			return assignState ({
-// 				currentAnswerInput: action.answer
-// 			});
+
             console.log("This is the user's answer " + action.payload)
             console.log("This is something else" + state.currentQuestion.answer)
 			if(action.payload.toString().toLowerCase() === state.currentQuestion.answer.toString().toLowerCase()) {
@@ -74,7 +72,6 @@ const reducers = function (state = initialState ,action) {
 				});
 			}
 			return newState;
-		
         default:
             return state;
     }
