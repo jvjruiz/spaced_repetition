@@ -14,9 +14,12 @@ class Questions extends Component {
     console.log(this.props)
     this.props.submitAnswer;
   }
-  onSubmit (event) {
+  ontheSubmit (event) {
         event.preventDefault();
+        
         this.props.onAddSubmit(this.refs.answerInput.value);
+        console.log(this.props.name)
+        this.props.submitAnswer;
         this.refs.answerInput.value = "";
    }
   componentWillMount(){
@@ -28,13 +31,13 @@ class Questions extends Component {
         <div className="App-Questions">
           <h3> Japanese word {this.props.currentQuestion.question}</h3>
           <h3> Translate the Japanese word to English </h3>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.ontheSubmit}>
               <input type="text" ref="answerInput" />
+              <Link to={'/feedback'}>
+              <button type ='button'><h3>Submit Answer</h3></button>
+              </Link> 
+              
           </form>
-            <Link to={'/feedback'}>
-            <button onClick={this.onButtonClick.bind(this)} type ='button'><h3>Submit Answer </h3></button>
-            </Link>
-          
         </div>
     );
   }
@@ -54,7 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddSubmit: function(answerInput) {
-            dispatch(submitAnswer(answerInput));
+            dispatch(userAnswer(answerInput));
         },
         currentQuestion1: function(userId) {
             dispatch(CurrentQuestion(userId))

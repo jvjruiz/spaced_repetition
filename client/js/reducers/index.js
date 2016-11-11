@@ -17,7 +17,8 @@ const initialState = {
     currentUser: null,
     counter: 0,
     isCorrect: false,
-    questions : {}
+    questions : {},
+    currentAnswerInput: null
     
 };
 const reducers = function (state = initialState ,action) {
@@ -50,9 +51,9 @@ const reducers = function (state = initialState ,action) {
                 isCorrect: action.isCorrect
             });
         case USER_ANSWER:
-			return assignState ({
-				currentAnswerInput: action.answer
-			});
+// 			return assignState ({
+// 				currentAnswerInput: action.answer
+// 			});
 
 			if(newState.correctAnswer.toString().toLowerCase() === newState.currentAnswerInput.toString().toLowerCase()) {
 				newState = Object.assign({}, state, {
@@ -70,6 +71,8 @@ const reducers = function (state = initialState ,action) {
 					showNextQuestionButton: true
 				})
 			}
+			return newState;
+		
         default:
             return state;
     }
