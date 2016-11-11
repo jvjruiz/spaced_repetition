@@ -8,16 +8,18 @@ import {QUESTION_CORRECT} from '../actions/actions';
 import {FEEDBACK} from '../actions/actions';
 import {LOG_IN_FAILURE} from '../actions/actions';
 import {USER_ANSWER} from '../actions/actions';
+import {USER_DATA_TO_STATE} from '../actions/actions';
 
 const initialState = {
     isUserVisible: false,
-    userId: "5824d613ad04c481507a6b84",
+    userId: null,
     isQuestionVisible: false,//boolean in state for question transition (if true, I don't want to render anything but feedback)
     currentQuestion: {},
     currentUser: null,
     counter: 0,
     isCorrect: false,
-    currentAnswerInput: ''
+    currentAnswerInput: '',
+    userToken: null
     
 };
 const reducers = function (state = initialState ,action) {
@@ -72,6 +74,15 @@ const reducers = function (state = initialState ,action) {
 				});
 			}
 			return newState;
+			
+		case USER_DATA_TO_STATE:
+		    newState = Object.assign({}, state, {
+		        userId: action.userId,
+		        userToken: action.accessToken
+		    });
+		    console.log('inside reducer ' + newState)
+		    return newState
+		    
         default:
             return state;
     }

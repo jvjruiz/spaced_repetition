@@ -168,28 +168,11 @@ export const CurrentQuestion = function (userId) {
 };
 
 
-
- //   function callback(res){
-    //   dispatch(questionSuccess(res))
-    // }
-
-
-//waiting for oauth login
-// for main page 'https://space-repetition-app-michellen.c9users.io/'
-// for next question '/api/questions/nextquestion/:userId'
-// To submit answer to database '/api/questions/:userId'
-
-
-
-//AJAX CALL TO GET SUBREDDIT
-// export const fetchVideo = () => {
-//   return dispatch => {
-//     dispatch(requestVideo())
-//     return fetch('https://www.youtube.com/watch?v=JvdwowH_4Y8')
-//       .then(response => response.json())
-//       .then(json => dispatch(receiveVideo(json.video)))
-//   }
-// }
-
-//if user is not authenicated, back to log in page
-// if user is autehnicated, do stuff
+export const USER_DATA_TO_STATE = 'USER_DATA_TO_STATE';
+export const userDataToState = function (userId, accessToken) {
+  return {
+    type:USER_DATA_TO_STATE,
+    userId: userId,
+    accessToken: accessToken
+  }
+}

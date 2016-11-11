@@ -15,7 +15,6 @@ module.exports = function(app,models,middleware) {
         models.user 
             .findById(userId, function(err, user) {
                 if(err) return res.status(500).json(err);
-                console.log(user.questionQueue)
                 return res.json(user.questionQueue[0]);
             });
     });

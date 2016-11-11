@@ -17,7 +17,7 @@ module.exports = function(app,models,middleware) {
         function(req,res) {
             console.log('req.accessToken',req.accessToken);
             console.log(req.user)
-            res.redirect('/?access_token=' + req.user.token +"&userId="+req.user._id)
+            res.redirect('/#/startGame/?access_token=' + req.user.token +"&userId="+req.user._id)
         }
     )
 };
