@@ -1,47 +1,34 @@
 //feedback component
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import submitAnswer from '../actions/actions';
+import submitAnswerSuccess from '../actions/actions';
+import QuestionCorrect from '../actions/actions';
+var router = require('react-router');
+var Link = router.Link;
 
 class Feedback extends Component {
-    if(answerKey == user.input){
-        onButtonClick() {
-        console.log('onButtonClick called');
-        this.props.dispatch(submitAnswerSuccess())}
+         onButtonClick() {
+         console.log('onButtonClick called');
+         this.props.dispatch(submitAnswer(userId, isCorrect))}
     
-    render() {
+     //"?" is like an operator (tiny 'if' statement)
+     render() {
         return (
             <div className="App-Feedback">
-            <h1> Yay. Ya did it. </h1>
-               <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>Next Question </h1></button>
-             </div>
-            );
-        }
+            <h1>{this.props.isCorrect ? "Yay" : "Boooo"}</h1>
+                <Link to={'/questions'}>
+                  <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>Next Question </h1></button>
+                 </Link>
+              </div>
+             );
+         }
     }
-    else {
-        onButtonClick() {
-        console.log('onButtonClick called');
-        this.props.dispatch(submitAnswerSuccess())}
-    
-    render() {
-        return (
-            <div className="App-Feedback">
-            <h1> Nah, bro. It's wrong. </h1>
-               <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>Next Question </h1></button>
-             </div>
-            );
-        }
+   
+const mapStateToProps = (state) => {
+    return {
+        isCorrect: state.isCorrect
     }
 }
 
-
-
-
-//  if() {
-//   var feedback = 'awesome';
-//   this.props.dispatch(gatherFeedback(feedback))
-// } else if() {
-//   var feedback = 'nearly there';
-//   this.props.dispatch(gatherFeedback(feedback))
-// } 
-
-export default Questions;
+export default connect(mapStateToProps)(Feedback);

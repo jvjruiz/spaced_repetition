@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import StartGameButton from './components/StartGame';
-
 import Counter from './components/Counter';
-import Questions from './components/Questions';
 import Homepage from './components/Homepage';
+
+
 // remmeber to import Game component
 
 

@@ -12,7 +12,7 @@ module.exports = function(app,models,middleware) {
         // models.user.findOne({
         //     username: req.params.userName
         // }, function(err,user) {
-        //     if(err) return next(err);
+        //     if(err) return res.status(500).json(err);
         //     console.log("hello " + user);
         //     res.status(200).json(user);
         // })
@@ -32,7 +32,7 @@ module.exports = function(app,models,middleware) {
                     questionQueue: seedData()
                 });
                 newUser.save(function(err) {
-                    if(err) return next(err)
+                    if(err) return res.status(500).json(err)
                     return res.status(201).send(newUser)    
                 })
             })
@@ -40,7 +40,7 @@ module.exports = function(app,models,middleware) {
     app.put('/api/users/:userId', function(req,res,next) {
         if(req.body.email)req.user.email = req.body.email
         req.user.save(function(err) {
-            if(err) return next(err)
+            if(err) return res.status(500).json(err)
             res.send(req.user)
         })
     })
@@ -54,7 +54,7 @@ module.exports = function(app,models,middleware) {
         models.user
             .findOne({_id:id})
             .exec(function(err,user) {
-                if(err) return next(err)
+                if(err) return res.status(500).json(err)
                 if(!user) return res.status(404).send("No user exists")
                 req.user = user
                 next()

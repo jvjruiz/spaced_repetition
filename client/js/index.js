@@ -8,11 +8,12 @@ import Reactdom from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store/store';
 import App from './App';
+import routes from './components/routes'
 
 
 
 
 export default store;
-Reactdom.render(<Provider store ={store}><App/></Provider>, document.getElementById('app'));
-//Provider allows you to connect to redux to react
+Reactdom.render(<Provider store ={store}>{routes}</Provider>, document.getElementById('app'));
+//Provider allows you to connect to redux to react00    
 

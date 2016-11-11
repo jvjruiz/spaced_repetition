@@ -1,21 +1,26 @@
 import {createStore} from "redux";
-import LOG_IN_BUTTON from '../actions/actions'
-import LOG_IN_SUCCESS from '../actions/actions';
-import CURRENT_USER from '../actions/actions'
-import START_GAME from '../actions/actions'
-import QUESTION_SUCCESS from '../actions/actions'
-import QUESTION_CORRECT from '../actions/actions';
-import FEEDBACK from '../actions/actions';
-import LOG_IN_FAILURE from '../actions/actions'
+import {LOG_IN_BUTTON} from '../actions/actions'
+import {LOG_IN_SUCCESS} from '../actions/actions';
+import {CURRENT_USER} from '../actions/actions'
+import {START_GAME} from '../actions/actions'
+import {QUESTION_SUCCESS} from '../actions/actions'
+import {QUESTION_CORRECT} from '../actions/actions';
+import {FEEDBACK} from '../actions/actions';
+import {LOG_IN_FAILURE} from '../actions/actions';
+import {USER_ANSWER} from '../actions/actions';
 
 const initialState = {
     isUserVisable: false,
+    userId: "5824d613ad04c481507a6b84",
     isQuestionVisible: false,//boolean in state for question transition (if true, I don't want to render anything but feedback)
-    counter: 0
+    currentQuestion: {},
+    currentUser: null,
+    counter: 0,
+    isCorrect: false,
+    questions : {}
     
 };
-const reducers = function (state,action) {
-    state = state || initialState;
+const reducers = function (state = initialState ,action) {
     function assignState(newState){
       return Object.assign({}, state, newState);
     } 
@@ -42,12 +47,29 @@ const reducers = function (state,action) {
             });
         case QUESTION_CORRECT:
             return assignState({
-                feedbackstring: "GREAT JOB"
+                isCorrect: action.isCorrect
             });
-        case FEEDBACK:
-            return assignState({
-                currentQuestion: action.payload
-            });
+        case USER_ANSWER:
+			return assignState ({
+				currentAnswerInput: action.answer
+			});
+
+			if(newState.correctAnswer.toString().toLowerCase() === newState.currentAnswerInput.toString().toLowerCase()) {
+				newState = Object.assign({}, state, {
+					currentAnswerInput: action.answer,
+					currentFeedback: 'Correct!',
+					isCorrect: true,
+					showNextQuestionButton: true
+				})
+			}	
+			else {
+				newState = Object.assign({}, state, {
+					currentAnswerInput: action.answer,
+					currentFeedback: 'Incorrect, please try again.',
+					isCorrect: false,
+					showNextQuestionButton: true
+				})
+			}
         default:
             return state;
     }

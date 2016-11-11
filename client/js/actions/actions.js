@@ -82,8 +82,8 @@ export const submitAnswerSuccess = (userId) => {
     return fetch('/api/questions/nextquestion/' + userId, function callback(res){
       dispatch(questionSuccess(res.json()));
       dispatch(Feedback());
-    })
-  }
+    });
+  };
 };
 
 //ACTION IF THE SUBMITTED ANSWER FAILED
@@ -99,20 +99,32 @@ export const submitAnswerFailure = (error) => {
 export const SUMBIT_ANSWER = 'SUBMIT_ANSWER';
 export const submitAnswer = function (userId, iscorrect) {
   return dispatch => {
-    return fetch('/api/questions/' + userId,{method: 'POST',
+    return fetch('/api/questions/' + userId,{
+      method: 'POST',
       body:{
         iscorrect: iscorrect
       }}).then(function (res) {
+        console.log(res)
       dispatch(submitAnswerSuccess(res.json()));
     });
   };
 };
 
+export const USER_ANSWER = 'USER_ANSWER';
+export const userAnswer = function (answer) {
+	return {
+		type: USER_ANSWER,
+		answer: answer
+	}
+}
+
+
 //ACTION TO  DETERMINE WHETHER QUESTION IS CORRECT
 export const QUESTION_CORRECT = 'QUESTION_CORRECT';
-export const QuestionCorrect = () => {
+export const QuestionCorrect = (text) => {
   return{
-    type: QUESTION_CORRECT
+    type: QUESTION_CORRECT,
+    text
   };
 };
 
@@ -120,6 +132,7 @@ export const QuestionCorrect = () => {
 //ACTION IF THE QUESTION RECIEVED SUCCESSFULLY
 export const QUESTION_SUCCESS = 'QUESTION_SUCCESS';
 export const questionSuccess = (payload) => {
+  console.log(payload)
   return {
     type: QUESTION_SUCCESS,
     payload: payload
@@ -138,11 +151,22 @@ export const questionFailure = (error) => {
 export const CURRENT_QUESTION = 'CURRENT_QUESTION';
 export const CurrentQuestion = function (userId) {
   return dispatch => {
-    return fetch('api/questions/nextquestion/' + userId).then(function callback(res){
-      dispatch(questionSuccess(res.json()))
+    return fetch('api/questions/nextquestion/' + userId)
+    .then(function(response, error) {
+     return response.json();
+     console.log("1st response" + response)
+    }).then(function(response) {
+      console.log("2nd response" + response)
+      return dispatch(questionSuccess(response))
     });
   }
 };
+
+
+
+ //   function callback(res){
+    //   dispatch(questionSuccess(res))
+    // }
 
 
 //waiting for oauth login

@@ -4,7 +4,8 @@ module.exports = function(app,models,middleware) {
         var userId = req.params.userId
         models.user 
             .findById(userId, function(err, user) {
-                if(err) return next(err)
+                console.log("You got an errrrororoororroor")
+                if(err) return res.status(500).json(err)
                 return res.json(user.questionQueue)
             })
     })
@@ -13,17 +14,17 @@ module.exports = function(app,models,middleware) {
         var userId = req.params.userId
         models.user 
             .findById(userId, function(err, user) {
-                if(err) return next(err)
+                if(err) return res.status(500).json(err)
                 return res.json(user.questionQueue[0])
             })
     })
     
-    app.post('/api/questions/:userId/:isCorrect', function(req,res,next) {
+    app.post('/api/questions/:userId/', function(req,res,next) {
         var userId = req.params.userId
         var isCorrect = req.body.isCorrect === true;
         models.user
             .findById(userId,function(err, user) {
-                if(err) return next(err)
+                if(err) return res.status(500).json(err)
                 if(user == null) return res.status(404).send('User does not exist')
                 var question = user.questionQueue.shift();
                 if(isCorrect) {
@@ -39,9 +40,10 @@ module.exports = function(app,models,middleware) {
                     user.questionQueue.splice(question.weight,0,question);
                 }
                 user.save(function(err) {
-                    if(err) return next(err)
+                    if(err) return res.status(500).json(err)
                     return res.sendStatus(204)
                 })
             })
     })
 }
+

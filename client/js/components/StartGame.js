@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StartGame } from '../actions/actions';
 import { connect } from 'react-redux';
+var router = require('react-router');
+var Link = router.Link;
 
 class StartGameButton extends Component {
 
-  onButtonClick() {
+  onButtonClick(event) {
     console.log('onButtonClick called');
     this.props.dispatch(StartGame());
     this.props.dispatch(currentQuestion(props.currentId));
@@ -14,7 +16,9 @@ class StartGameButton extends Component {
     return (
         <div id="start-game-button">
         <h3> Hello, {this.props.user} </h3>
+        <Link to={'/questions'}>
         <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>START GAME </h1></button>
+        </Link>
         </div>
     );
   }
@@ -24,7 +28,8 @@ class StartGameButton extends Component {
 const mapStateToProps = (state) => {
   return {
     name: state.name,
-    currentId: state.currentId
+    currentId: state.currentId,
+    currentQuestion : state.currentQuestion
   };
 };
 
