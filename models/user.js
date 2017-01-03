@@ -15,6 +15,10 @@ const UserSchema = new Mongoose.Schema({
         type:String,
         required: true
     },
+    score: {
+        type: Number,
+        required: false
+    },
     questionQueue: [{
         question: String,
         answer: String,

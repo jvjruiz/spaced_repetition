@@ -4,7 +4,6 @@ module.exports = function(app,models,middleware) {
         var userId = req.params.userId;
         models.user 
             .findById(userId, function(err, user) {
-                console.log("You got an errrrororoororroor");
                 if(err) return res.status(500).json(err);
                 return res.json(user.questionQueue);
             });
@@ -20,8 +19,6 @@ module.exports = function(app,models,middleware) {
     });
     
     app.post('/api/questions/:userId/', function(req,res,next) {
-
-        console.log(req.body)
         var userId = req.params.userId;
         var isCorrect = req.body.isCorrect === true;
         models.user
@@ -30,6 +27,7 @@ module.exports = function(app,models,middleware) {
                 if(user == null) return res.status(404).send('User does not exist');
                 var question = user.questionQueue.shift();
                 if(isCorrect) {
+                    user.score++
                     question.weight *= 2;
                 }
                 else {

@@ -45,7 +45,6 @@ export const logInFailure = (error) => {
 //ACTION TO START THE GAME 
 export const START_GAME = 'START_GAME';
 export const StartGame = (userId) => {
-  console.log('startGame actions calleds');
   return {
    type: START_GAME
   };
@@ -107,11 +106,10 @@ export const submitAnswer = function (userId, isCorrect) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body:JSON.stringify({
+      body:{
         isCorrect: isCorrect
-      })
+      }
     }).then(function (res) {
-        console.log(res)
       dispatch(submitAnswerSuccess(userId));
     });
   };
@@ -119,7 +117,6 @@ export const submitAnswer = function (userId, isCorrect) {
 
 export const USER_ANSWER = 'USER_ANSWER';
 export const userAnswer = function (answer) {
-	console.log('inside of action')
 	return {
 		type: USER_ANSWER,
 		payload: answer
@@ -174,5 +171,24 @@ export const userDataToState = function (userId, accessToken) {
     type:USER_DATA_TO_STATE,
     userId: userId,
     accessToken: accessToken
+  }
+}
+
+export const FETCH_USER_SCORE = 'FETCH_USER_SCORE';
+export const fetchUserScore = function(userId) {
+  return dispatch => {
+    return fetch('/api/user/' + userId + '/userScore')
+    .then(function(response,error) {
+      return response.json();
+    }).then(function(response) {
+      return dispatch(fetchUserScoreSuccess(response))
+    })
+  }
+}
+export const FETCH_USER_SCORE_SUCCESS = 'FETCH_USER_SCORE_SUCCESS'
+export const fetchUserScoreSuccess = (userScore) => {
+  return {
+    type: 'FETCH_USER_SCORE_SUCCESS',
+    payload: userScore
   }
 }

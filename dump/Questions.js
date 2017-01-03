@@ -8,6 +8,7 @@ var actions = require('../actions/actions')
 var checkAnswer = actions.checkAnswer
 var updateQueue = actions.updateQueue
 
+import {submitAnswerSuccess} from '../actions/actions'
 
 var Questions = React.createClass({
     onSubmit: function (event) {
@@ -16,8 +17,7 @@ var Questions = React.createClass({
         this.refs.answerInput.value = "";
    },
    componentWillMount: function(){
-    console.log(this.props)
-        this.props.currentQuestion1(this.props.currentId);
+        this.props.onLoad(this.props.currentId);
   },
   checkAnswer: function(userInput){
       if(userInput == this.props.question.answer) {
@@ -53,6 +53,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onLoad: function(userId) {
+            dispatch(submitAnswerSuccess(userId))
+        },
         onAddSubmit: function(answerInput,isCorrect) {
             dispatch(checkAnswer(answerInput));
             dispatch(updateQueue(isCorrect)) 
