@@ -38,6 +38,16 @@ module.exports = function(app,models,middleware) {
                 });
             });
     });
+    
+    app.get('/api/user/:userId/userScore',function(req,res,next){
+        var userId = req.params.userId
+        models.user 
+            .findById(userId, function(err, user) {
+                if(err) return res.status(500).json(err);
+                return res.json(user.score);
+            });
+    });
+    
     app.put('/api/users/:userId', function(req,res,next) {
         if(req.body.email)req.user.email = req.body.email;
         req.user.save(function(err) {

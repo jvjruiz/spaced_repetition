@@ -45,7 +45,6 @@ export const logInFailure = (error) => {
 //ACTION TO START THE GAME 
 export const START_GAME = 'START_GAME';
 export const StartGame = (userId) => {
-  console.log('startGame actions calleds');
   return {
    type: START_GAME
   };
@@ -107,11 +106,10 @@ export const submitAnswer = function (userId, isCorrect) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body:JSON.stringify({
+      body:{
         isCorrect: isCorrect
-      })
+      }
     }).then(function (res) {
-        console.log(res)
       dispatch(submitAnswerSuccess(userId));
     });
   };
@@ -119,7 +117,6 @@ export const submitAnswer = function (userId, isCorrect) {
 
 export const USER_ANSWER = 'USER_ANSWER';
 export const userAnswer = function (answer) {
-	console.log('inside of action')
 	return {
 		type: USER_ANSWER,
 		payload: answer
@@ -168,28 +165,30 @@ export const CurrentQuestion = function (userId) {
 };
 
 
+export const USER_DATA_TO_STATE = 'USER_DATA_TO_STATE';
+export const userDataToState = function (userId, accessToken) {
+  return {
+    type:USER_DATA_TO_STATE,
+    userId: userId,
+    accessToken: accessToken
+  }
+}
 
- //   function callback(res){
-    //   dispatch(questionSuccess(res))
-    // }
-
-
-//waiting for oauth login
-// for main page 'https://space-repetition-app-michellen.c9users.io/'
-// for next question '/api/questions/nextquestion/:userId'
-// To submit answer to database '/api/questions/:userId'
-
-
-
-//AJAX CALL TO GET SUBREDDIT
-// export const fetchVideo = () => {
-//   return dispatch => {
-//     dispatch(requestVideo())
-//     return fetch('https://www.youtube.com/watch?v=JvdwowH_4Y8')
-//       .then(response => response.json())
-//       .then(json => dispatch(receiveVideo(json.video)))
-//   }
-// }
-
-//if user is not authenicated, back to log in page
-// if user is autehnicated, do stuff
+export const FETCH_USER_SCORE = 'FETCH_USER_SCORE';
+export const fetchUserScore = function(userId) {
+  return dispatch => {
+    return fetch('/api/user/' + userId + '/userScore')
+    .then(function(response,error) {
+      return response.json();
+    }).then(function(response) {
+      return dispatch(fetchUserScoreSuccess(response))
+    })
+  }
+}
+export const FETCH_USER_SCORE_SUCCESS = 'FETCH_USER_SCORE_SUCCESS'
+export const fetchUserScoreSuccess = (userScore) => {
+  return {
+    type: 'FETCH_USER_SCORE_SUCCESS',
+    payload: userScore
+  }
+}

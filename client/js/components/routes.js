@@ -13,7 +13,7 @@ import Counter from './Counter';
 
 var routes = (
     <Router history = {hashHistory}>
-        <Route path ='/homepage' component = {Homepage}/>
+        <Route path ='/' component = {Homepage}/>
         <Route path ='/startGame' component = {StartGame}/>
         <Route path ='/feedback' component = {Feedback}/>
         <Route path ='/questions' component = {Questions}>
