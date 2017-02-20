@@ -8,20 +8,24 @@ import {QUESTION_CORRECT} from '../actions/actions';
 import {FEEDBACK} from '../actions/actions';
 import {LOG_IN_FAILURE} from '../actions/actions';
 import {USER_ANSWER} from '../actions/actions';
+import {USER_DATA_TO_STATE} from '../actions/actions';
+import {FETCH_USER_SCORE_SUCCESS} from '../actions/actions'
 
 const initialState = {
     isUserVisible: false,
-    userId: "5824d613ad04c481507a6b84",
+    userId: null,
     isQuestionVisible: false,//boolean in state for question transition (if true, I don't want to render anything but feedback)
     currentQuestion: {},
     currentUser: null,
     counter: 0,
     isCorrect: false,
-    currentAnswerInput: ''
+    currentAnswerInput: '',
+    userToken: null,
+    userScore: 0
     
 };
 const reducers = function (state = initialState ,action) {
-    var newState 
+    var newState
     function assignState(newState){
       return Object.assign({}, state, newState);
     } 
@@ -52,15 +56,13 @@ const reducers = function (state = initialState ,action) {
             });
 
         case USER_ANSWER:
-
-            console.log("This is the user's answer " + action.payload)
-            console.log("This is something else" + state.currentQuestion.answer)
 			if(action.payload.toString().toLowerCase() === state.currentQuestion.answer.toString().toLowerCase()) {
 				newState = Object.assign({}, state, {
 					currentAnswerInput: action.answer,
 					currentFeedback: 'Correct!',
 					isCorrect: true,
-					showNextQuestionButton: true
+					showNextQuestionButton: true,
+					userScore: state.userScore + 1
 				});
 			}	
 			else {
@@ -72,8 +74,17 @@ const reducers = function (state = initialState ,action) {
 				});
 			}
 			return newState;
+			
+		case USER_DATA_TO_STATE:
+		    newState = Object.assign({}, state, {
+		        userId: action.userId,
+		        userToken: action.accessToken
+		    });
+		    return newState
+		    
         default:
             return state;
+            
     }
 };
 

@@ -3,88 +3,75 @@
 *::before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
+  box-sizing: border-box; }
 
 #correct {
-  background-color: #60ffc5;
+  background-color: red;
   padding: 1em;
-    margin: 4em 18em 4em;
-    font-family: 'Amatic SC', cursive;
-}
+  margin: 4em 10em 4em; }
+
 body {
-  font-family: 'Raleway', sans-serif;
-}
-#right{
-  background-color: white;
-      padding: 16px;
-}
-#wrong{
-  background-color: white;
-      padding: 16px;
-}
+  font-family: 'Raleway', sans-serif; }
+
+#right {
+  background-color: #60ffc5; }
+
+#wrong {
+  background-color: #60ffc5; }
+
 h2 {
   font-family: 'Amatica SC', cursive;
   text-align: center;
   font-size: 100px;
-      background-color: #60ffc5;
-}
+  background-color: #60ffc5; }
+
 h3 {
-  text-align: center;
-}
-#explaination-container{
-  background-color: black;
-  padding: 2em;
-}
-#explaination{
-  background-color: #60ffc5;
+  text-align: center; }
+
+#explaination {
   font-family: monospace;
-  font-size: 50px;
-  line-height: 200%;
-  font-family: 'Amatic SC', cursive;
-}
-#explaination-paragraph{
+  font-size: 25px;
+  line-height: 200%; }
+
+#explaination-paragraph {
   font-family: monospace;
-  line-height: 200%;
-  margin: 1em;
-}
+  line-height: 200%; }
+
 button {
   background-color: #60ffc5;
   color: white;
-  text-align: center;
-}
-#start-game-button{
+  text-align: center; }
+
+#start-game-button {
   margin: 100px;
   text-align: center;
-  padding: 1em;
-}
+  padding: 1em; }
 
-.enter-button{
+.enter-button {
   background-color: #60ffc5;
   color: white;
   text-align: center;
-  padding: 1em;
-}
-form{
-  text-align: center
-}
-.App-Questions{
-  text-align: center;
-}
+  padding: 1em; }
+
+form {
+  text-align: center; }
+
+.App-Questions {
+  text-align: center; }
+
 .App-Feedback {
   text-align: center;
-  margin: 5em;
-}
-#enter-button-container{
+  margin: 5em; }
+
+#enter-button-container {
   height: 10em;
-    position: relative 
-}
-input[type=text]{
-  background: url(https://maxcdn.icons8.com/Color/PNG/24/Computer_Hardware/mouse_left_click-24.png) 0.2em 0.3em no-repeat, linear-gradient(to bottom, #f7f7f8 0%,#ffffff 100%);
+  position: relative; }
+
+input[type=text] {
+  background: url(https://maxcdn.icons8.com/Color/PNG/24/Computer_Hardware/mouse_left_click-24.png) 0.2em 0.3em no-repeat, linear-gradient(to bottom, #f7f7f8 0%, #ffffff 100%);
   border-radius: 3px;
   border: none;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 -1px 0 rgba(0, 0, 0, 0.05) inset;
   transition: all 0.2s linear;
   font-family: "Helvetica Neue", sans-serif;
   font-size: 13px;
@@ -92,54 +79,44 @@ input[type=text]{
   position: relative;
   height: 36px;
   width: 300px;
-  padding-left: 30px;
-//he :focus CSS pseudo-class is applied when an element has received focus, either from the user selecting it with the use of a keyboard or by activating with the mouse (e.g. a form input).
-  &:focus{
-    box-shadow: 0 1px 0 #2392F3 inset, 0 -1px 0 #2392F3 inset, 1px 0 0 #2392F3 inset, -1px 0 0 #2392F3 inset, 0 0 4px rgba(35,146,243,0.5);
+  padding-left: 30px; }
+  input[type=text]:focus {
+    box-shadow: 0 1px 0 #2392F3 inset, 0 -1px 0 #2392F3 inset, 1px 0 0 #2392F3 inset, -1px 0 0 #2392F3 inset, 0 0 4px rgba(35, 146, 243, 0.5);
     outline: none;
-    background: url(https://maxcdn.icons8.com/Color/PNG/24/Computer_Hardware/enter-24.png) 20.5em 0.3em no-repeat, linear-gradient(to bottom, #f7f7f8 0%,#ffffff 100%);
-  }
-}
+    background: url(https://maxcdn.icons8.com/Color/PNG/24/Computer_Hardware/enter-24.png) 17.5em 0.3em no-repeat, linear-gradient(to bottom, #f7f7f8 0%, #ffffff 100%); }
 
 p {
   color: #424242;
   font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
-  letter-spacing:0.1em;
-  text-align:center;
+  letter-spacing: 0.1em;
+  text-align: center;
   margin: 1.5em auto 0.75em;
   text-transform: lowercase;
   line-height: 145%;
   font-size: 1.8em;
-  font-variant: small-caps;
-}
+  font-variant: small-caps; }
 
-p:first-letter{
-  text-transform: uppercase;
-}
+p:first-letter {
+  text-transform: uppercase; }
 
 section {
   margin: 0 auto;
   padding: 2em 3em;
-  text-align: center;
-}
+  text-align: center; }
 
 div.foo {
   width: 90%;
   margin: 0 auto;
-  text-align: center;
-}
+  text-align: center; }
 
 .logout {
-  font-size: 0.75em;
-}
+  font-size: 0.75em; }
 
 .correct {
-  color: #00B4F1;
-}
+  color: #00B4F1; }
 
 .incorrect {
-  color: #e93d00;
-}
+  color: #e93d00; }
 
 .letter {
   display: inline-block;
@@ -151,9 +128,7 @@ div.foo {
   transform-style: preserve-3d;
   perspective: 400;
   z-index: 1;
-   text-shadow: 2px 2px 10px grey;
-}
-
+  text-shadow: 2px 2px 10px grey; }
 
 a {
   position: relative;
@@ -167,20 +142,15 @@ a {
   font-weight: 400;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
   font-size: 1.35em;
-  text-align: center;
-}
+  text-align: center; }
 
 a:hover,
 a:focus {
-  outline: none;
-}
-
-
+  outline: none; }
 
 .button a {
   margin: 0 30px;
-  padding: 18px 20px;
-}
+  padding: 18px 20px; }
 
 .button a::before,
 .button a::after {
@@ -194,16 +164,12 @@ a:focus {
   opacity: 0.2;
   -webkit-transition: opacity 0.3s, height 0.3s;
   -moz-transition: opacity 0.3s, height 0.3s;
-  transition: opacity 0.3s, height 0.3s;
-}
-
-
+  transition: opacity 0.3s, height 0.3s; }
 
 .button a span:first-child {
   z-index: 2;
   display: block;
-  font-weight: 300;
-}
+  font-weight: 300; }
 
 .button a span:last-child {
   height: 6px;
@@ -220,7 +186,8 @@ a:focus {
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   -moz-transition: -moz-transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
-   -webkit-transform: translateY(0px);
+  -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
-  transform: translateY(0px);
-}
+  transform: translateY(0px); }
+
+/*# sourceMappingURL=index.css.map */
