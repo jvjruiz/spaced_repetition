@@ -32,9 +32,9 @@ var clientID = secrets.clientID
 var clientSecret = secrets.clientSecret
 var cbURL = secrets.devHostname
 passport.use(new GoogleStrategy({
-    clientID: clientID,
-    clientSecret: clientSecret,
-    callbackURL:cbURL + '/auth/google/callback',
+    clientID: process.env.CLIENT_ID || secrets.clientId,
+    clientSecret: process.env.CLIENT_SECRET || secrets.clientSecret,
+    callbackURL: process.env.DEV_HOST_NAME || "http://" + secrets.devHostname + "/auth/google/callback",
     passReqToCallback: true
     },
     function(request, accessToken, refreshToken, profile, callback) {

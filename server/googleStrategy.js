@@ -6,7 +6,7 @@ var clientSecret = secrets.clientSecret
 var BearerStrategy = require('passport-http-bearer').Strategy
 var User = require('../models/user')
 
-
+//currently not in use, to be deleted
 
 var GoogleStrategy = new GoogleStrategy({
     clientID: process.env.CLIENT_ID || secrets.clientId,
