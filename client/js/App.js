@@ -28,7 +28,3 @@ class App extends Component {
 }
 
 export default App;
-
-//use react router to make different pages
-//use react redux to change the state properly
-//(map disptach to props map.state. to props) using connect method.

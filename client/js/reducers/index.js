@@ -50,11 +50,6 @@ const reducers = function (state = initialState ,action) {
             return assignState({
                 currentQuestion: action.payload
             });
-        case QUESTION_CORRECT:
-            return assignState({
-                isCorrect: action.isCorrect
-            });
-
         case USER_ANSWER:
 			if(action.payload.toString().toLowerCase() === state.currentQuestion.answer.toString().toLowerCase()) {
 				newState = Object.assign({}, state, {
@@ -74,7 +69,7 @@ const reducers = function (state = initialState ,action) {
 				});
 			}
 			return newState;
-			
+		
 		case USER_DATA_TO_STATE:
 		    newState = Object.assign({}, state, {
 		        userId: action.userId,
@@ -87,11 +82,6 @@ const reducers = function (state = initialState ,action) {
             
     }
 };
-
-//score key in initial state
-//user key in initial state
-
-
 
 const counter = (state = initialState, action) => {
   switch (action.type) {

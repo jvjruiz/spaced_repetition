@@ -15,8 +15,6 @@ class StartGameButton extends Component {
     this.props.userDataToState(userId,accessToken)
   }
   
-  
-  //how do I write, if the user clicks the button ,I want to render the current question
   render() {
     return (
         <div id="start-game-button">

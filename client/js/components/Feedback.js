@@ -12,8 +12,7 @@ class Feedback extends Component {
          onButtonClick() {
          this.props.dispatch(submitAnswer(this.props.userId, this.props.isCorrect))
          }
-    
-     //"?" is like an operator (tiny 'if' statement)
+         
      render() {
         return (
             <div className="App-Feedback">
@@ -31,7 +30,7 @@ const mapStateToProps = (state) => {
     return {
         isCorrect: state.isCorrect,
         userId: state.userId,
-        userScore: state.userScore
+        userScore: state.userScore,
     };
 };
 
