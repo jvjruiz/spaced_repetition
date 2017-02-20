@@ -98,7 +98,7 @@ require('./questionEndpoints.js')(app,models,middleware)
 require('./authEndpoints.js')(app,models,middleware)
 //RUN SERVER
 var runServer = function(callback) {
-    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spaced_repetition');
+    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://jayyahh:dataPw@ds029106.mlab.com:29106/spaced-repetition');
     var port = process.env.PORT || 8080;
     var server = app.listen(port, function() {
         console.log('Listening on localhost:' + port);
