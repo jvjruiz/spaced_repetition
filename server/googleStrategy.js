@@ -9,9 +9,10 @@ var User = require('../models/user')
 
 
 var GoogleStrategy = new GoogleStrategy({
-    clientID: secrets.clientId,
-    clientSecret: secrets.clientSecret,
-    callbackURL: "http://" + secrets.devHostname + "/auth/google/callback"
+    clientID: process.env.CLIENT_ID || secrets.clientId,
+    clientSecret: process.env.CLIENT_SECRET || secrets.clientSecret,
+    callbackURL: process.env.DEV_HOST_NAME || "http://" + secrets.devHostname + "/auth/google/callback",
+    passReqToCallback: true
     },
     function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({googleId: profile.id}, function(err,user) {
