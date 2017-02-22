@@ -16,7 +16,7 @@ class Feedback extends Component {
      render() {
         return (
             <div className="App-Feedback">
-            <h1 id="correct">{this.props.isCorrect ? <span id="right">You weeb! ;)</span> : <span id= "wrong">Nah, bro. It's wrong</span>}</h1>
+            <h1 id="correct">{this.props.isCorrect ? <span id="right">{this.props.currentFeedback}</span> : <span id= "wrong">{this.props.currentFeedback}</span>}</h1>
             <h3> Current Score is {this.props.userScore} </h3>
                 <Link to={'/questions'}>
                   <button onClick={this.onButtonClick.bind(this)} type ='button'><h1>Next Question </h1></button>
@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
         isCorrect: state.isCorrect,
         userId: state.userId,
         userScore: state.userScore,
+        currentFeedback: state.currentFeedback
     };
 };
 

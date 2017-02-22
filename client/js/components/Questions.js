@@ -45,7 +45,6 @@ class Questions extends Component {
   }
 }
 
-//pulls from the state
 const mapStateToProps = (state) => {
     return {
       name: state.name,
@@ -67,14 +66,5 @@ const mapDispatchToProps = (dispatch) => {
         }
     };
 };
-
-//
-
-//dispatchs an action that calls the reducer (called 'dispatch to props' because it's not mutating the state)
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     StartGame: () => dispatch(StartGame)
-//   };
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions); 

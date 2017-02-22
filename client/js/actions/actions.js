@@ -1,64 +1,15 @@
 var fetch = require('isomorphic-fetch');
 
-
-//ACTION TO LOG THE USER IN **** ASYNC
-export const LOG_USER_IN = "LOG_USER_IN";
-export const logUserIn = function (userId) {
-  return dispatch => {
-    return fetch('users/' + userId, function callback(res){
-      dispatch(loginInSuccess(res.json())),
-      dispatch(currentUser())
-    })
-  }
-};
-
-
-//******************************ACTION IF USER LOG IN IS SUCCESSFUL
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const loginInSuccess = (payload) => {
-  return {
-    type: LOG_IN_SUCCESS,
-    payload: payload
-  };
-};
-
-//ACTION IF USER LOG IN FAILED
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
-export const logInFailure = (error) => {
-  return {
-    type: LOG_IN_FAILURE,
-    payload: error
-  };
-};
-
-//**********************************ACTION TO SHOW WHAT USER IS LOGGED IN
-export const CURRENT_USER = 'CURRENT_USER';
-export const currentUser = function (userId) {
-  return dispatch => {
-    return fetch('/api/questions/nextquestion' + userId, function callback(res){
-      dispatch(StartGame())
-    })
-  }
-};
-
-//ACTION TO START THE GAME 
-export const START_GAME = 'START_GAME';
-export const StartGame = (userId) => {
-  return {
-   type: START_GAME
-  };
-};
-
+//checks to see if answer is correct or not
 export const USER_ANSWER = 'USER_ANSWER';
 export const userAnswer = function (answer) {
 	return {
 		type: USER_ANSWER,
 		payload: answer
 	}
-};
+}
 
-
-//Action to tell server if answer was correct or incorrect *****ASYNC 
+//updates queue on back-end by telling if current question was answered correctly or not
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 export const submitAnswer = function (userId, isCorrect) {
   return dispatch => {
@@ -78,7 +29,7 @@ export const submitAnswer = function (userId, isCorrect) {
   };
 };
 
-//async action to fetch next question
+//after updating queue, this is called to fetch the next question
 export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
 export const submitAnswerSuccess = (userId) => {
     return dispatch => {
@@ -88,7 +39,7 @@ export const submitAnswerSuccess = (userId) => {
   };
 };
 
-//ACTION IF THE SUBMITTED ANSWER FAILED not hooked up to anything yet
+//if updating queue has error, dispatch this
 export const SUBMIT_ANSWER_FAILURE = 'SUBMIT_ANSWER_FAILURE';
 export const submitAnswerFailure = (error) => {
   return {
@@ -97,12 +48,34 @@ export const submitAnswerFailure = (error) => {
   };
 };
 
-//Action to update state with next question
+//ACTION TO GET CURRENT QUESTION ***** ASYNC
+export const CURRENT_QUESTION = 'CURRENT_QUESTION';
+export const CurrentQuestion = function (userId) {
+  return dispatch => {
+    return fetch('api/questions/nextquestion/' + userId)
+    .then(function(response, error) {
+     return response.json();
+    }).then(function(response) {
+      return dispatch(questionSuccess(response))
+    });
+  }
+};
+
+//ACTION IF THE QUESTION RECIEVED SUCCESSFULLY
 export const QUESTION_SUCCESS = 'QUESTION_SUCCESS';
 export const questionSuccess = (payload) => {
   return {
     type: QUESTION_SUCCESS,
     payload: payload
+  };
+};
+
+//ACTION IF FETCHING THE QUESTIONS FAILS
+export const QUESTION_FAILURE = 'QUESTION_FAILURE';
+export const questionFailure = (error) => {
+  return {
+    type: QUESTION_FAILURE,
+    payload: error
   };
 };
 
@@ -115,8 +88,6 @@ export const userDataToState = function (userId, accessToken) {
   }
 }
 
-
-//currently not being used, may be in the future
 export const FETCH_USER_SCORE = 'FETCH_USER_SCORE';
 export const fetchUserScore = function(userId) {
   return dispatch => {
@@ -128,7 +99,6 @@ export const fetchUserScore = function(userId) {
     })
   }
 }
-
 export const FETCH_USER_SCORE_SUCCESS = 'FETCH_USER_SCORE_SUCCESS'
 export const fetchUserScoreSuccess = (userScore) => {
   return {

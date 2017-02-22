@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StartGame } from '../actions/actions';
 import { connect } from 'react-redux';
 var router = require('react-router');
 var Link = router.Link;
