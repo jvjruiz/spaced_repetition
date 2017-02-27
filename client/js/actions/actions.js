@@ -1,6 +1,7 @@
 var fetch = require('isomorphic-fetch');
 
 //checks to see if answer is correct or not
+//change to CHECK ANSWER
 export const USER_ANSWER = 'USER_ANSWER';
 export const userAnswer = function (answer) {
 	return {
@@ -10,6 +11,7 @@ export const userAnswer = function (answer) {
 }
 
 //updates queue on back-end by telling if current question was answered correctly or not
+//change to UPDATE QUEUE
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 export const submitAnswer = function (userId, isCorrect) {
   return dispatch => {
@@ -30,6 +32,7 @@ export const submitAnswer = function (userId, isCorrect) {
 };
 
 //after updating queue, this is called to fetch the next question
+//change to FETCH NEXT QUESTION
 export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
 export const submitAnswerSuccess = (userId) => {
     return dispatch => {
@@ -49,6 +52,7 @@ export const submitAnswerFailure = (error) => {
 };
 
 //ACTION TO GET CURRENT QUESTION ***** ASYNC
+//to be eliminated, has same functionality as future FETCH NEXT QUESTION
 export const CURRENT_QUESTION = 'CURRENT_QUESTION';
 export const CurrentQuestion = function (userId) {
   return dispatch => {
@@ -62,6 +66,7 @@ export const CurrentQuestion = function (userId) {
 };
 
 //ACTION IF THE QUESTION RECIEVED SUCCESSFULLY
+//change to FETCH_QUESTION_SUCCESS
 export const QUESTION_SUCCESS = 'QUESTION_SUCCESS';
 export const questionSuccess = (payload) => {
   return {
@@ -71,6 +76,7 @@ export const questionSuccess = (payload) => {
 };
 
 //ACTION IF FETCHING THE QUESTIONS FAILS
+//change to FETCH_QUESTION_FAILURE
 export const QUESTION_FAILURE = 'QUESTION_FAILURE';
 export const questionFailure = (error) => {
   return {
@@ -88,6 +94,7 @@ export const userDataToState = function (userId, accessToken) {
   }
 }
 
+//future functionality
 export const FETCH_USER_SCORE = 'FETCH_USER_SCORE';
 export const fetchUserScore = function(userId) {
   return dispatch => {

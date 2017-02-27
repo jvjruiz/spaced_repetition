@@ -1,5 +1,10 @@
-add update queue action
-implement components with actions
+/*
+TO DO LIST
+rename actions and reducers
+replace names in components
+clean up code in backend 
 
-dispatch(updateQueue)
-dispatch(fetchQuestion)
+future functionality
+add the ability to make custom lists per user
+have the ability to choose which list the user wants to quiz from
+*/
