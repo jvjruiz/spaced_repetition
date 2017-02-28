@@ -2,9 +2,10 @@
 var seedData = require('../factory_functions/seed-data.js');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var secrets = require('../secrets');
-var clientID = secrets.clientID;
-var clientSecret = secrets.clientSecret;
-var cbURL = secrets.devHostname;
+
+var clientID = secrets.clientID || process.env.CLIENT_ID;
+var clientSecret = secrets.clientSecret || process.env.CLIENT_SECRET;
+var cbURL = secrets.devHostname || process.env.DEV_HOST_NAME;
 
 module.exports = function(passport, models) {
     passport.use(new GoogleStrategy({
