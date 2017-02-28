@@ -7,15 +7,9 @@ import bodyParser from 'body-parser';
 import errorHandler from 'errorhandler';
 import passport from 'passport'
 
-//MODELS might not need this section
-import user from '../models/user'
-
 //ROUTES
-import userEndpoints from './userEndpoints';
-import questionEndpoints from './questionEndpoints';
-import authEndpoints from './authEndpoints'
-
-// import passportStrategy from './passportStrategy'
+import questionEndpoints from './endpoints/questionEndpoints';
+import authEndpoints from './endpoints/authEndpoints'
 
 //CONSTANTS
 const HOST = process.env.HOST;
@@ -38,16 +32,18 @@ models.user = mongoose.model('User', require('../models/user'));
 var middleware = {}
 
 //PASSPORT CONFIG
-require('./googleStrategy.js')(passport,models)
+require('./passport/googleStrategy.js')(passport,models)
+
 //REGISTER PARAMS
 //if have a lot of params, can use this section to load a file up
+
 //REGISTER ROUTES
-require('./userEndpoints.js')(app,models,middleware)
-require('./questionEndpoints.js')(app,models,middleware)
-require('./authEndpoints.js')(app,models,middleware)
+require('./endpoints/questionEndpoints.js')(app,models,middleware)
+require('./endpoints/authEndpoints.js')(app,models,middleware)
+
 //RUN SERVER
 var runServer = function(callback) {
-    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://jayyahh:dataPw@ds029106.mlab.com:29106/spaced-repetition');
+    mongoose.connect(process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spaced_repetition');
     var port = process.env.PORT || 8080;
     var server = app.listen(port, function() {
         console.log('Listening on localhost:' + port);

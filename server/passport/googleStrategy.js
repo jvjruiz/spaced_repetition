@@ -1,12 +1,11 @@
 //GOOGLE PASSPORT STRATEGY
-var seedData = require('./factory_functions/seed-data.js');
+var seedData = require('../factory_functions/seed-data.js');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var secrets = require('./secrets');
+var secrets = require('../secrets');
 var clientID = secrets.clientID;
 var clientSecret = secrets.clientSecret;
 var cbURL = secrets.devHostname;
 
-console.log('hello')
 module.exports = function(passport, models) {
     passport.use(new GoogleStrategy({
         clientID: clientID,

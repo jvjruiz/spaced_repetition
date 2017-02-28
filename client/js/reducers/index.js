@@ -1,10 +1,10 @@
 import {createStore} from "redux";
 import {START_GAME} from '../actions/actions';
-import {QUESTION_SUCCESS} from '../actions/actions';
+import {FETCH_NEXT_QUESTION_SUCCESS} from '../actions/actions';
 import {QUESTION_CORRECT} from '../actions/actions';
 import {FEEDBACK} from '../actions/actions';
 import {LOG_IN_FAILURE} from '../actions/actions';
-import {USER_ANSWER} from '../actions/actions';
+import {CHECK_ANSWER} from '../actions/actions';
 import {USER_DATA_TO_STATE} from '../actions/actions';
 import {FETCH_USER_SCORE_SUCCESS} from '../actions/actions'
 
@@ -29,12 +29,12 @@ const reducers = function (state = initialState ,action) {
     } 
     switch(action.type) {
         
-        case QUESTION_SUCCESS:
+        case FETCH_NEXT_QUESTION_SUCCESS:
             return assignState({
                 currentQuestion: action.payload
             });
             
-        case USER_ANSWER:
+        case CHECK_ANSWER:
 			if(action.payload.toString().toLowerCase() === state.currentQuestion.answer.toString().toLowerCase()) {
 				newState = Object.assign({}, state, {
 					currentAnswerInput: action.answer,

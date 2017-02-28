@@ -1,16 +1,14 @@
 //feedback component
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {submitAnswer} from '../actions/actions';
-import {submitAnswerSuccess} from '../actions/actions';
-import {QuestionCorrect} from '../actions/actions';
+import {fetchNextQuestion} from '../actions/actions';
 var router = require('react-router');
 var Link = router.Link;
 
 class Feedback extends Component {
 
          onButtonClick() {
-         this.props.dispatch(submitAnswer(this.props.userId, this.props.isCorrect))
+         this.props.dispatch(fetchNextQuestion(this.props.userId))
          }
          
      render() {

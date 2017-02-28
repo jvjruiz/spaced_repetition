@@ -27,7 +27,6 @@ module.exports = function(app,models,middleware) {
                 if(user == null) return res.status(404).send('User does not exist');
                 var question = user.questionQueue.shift();
                 if(isCorrect) {
-                    user.score++
                     question.weight *= 2;
                 }
                 else {
