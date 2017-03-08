@@ -1,5 +1,0 @@
-add update queue action
-implement components with actions
-
-dispatch(updateQueue)
-dispatch(fetchQuestion)

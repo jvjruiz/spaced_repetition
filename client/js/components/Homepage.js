@@ -22,7 +22,7 @@ export class Homepage extends React.Component {
             </section>
             <section className="button">
                 <a href="/auth/google"> 
-                    <span>Log In Wiff Google</span>
+                    <span>Log In With Google</span>
                 </a>
             </section>
         </div>
