@@ -1,74 +1,31 @@
-# Thinkful Full Stack Template
+# Japanese X
 
-A template for developing and deploying full stack JavaScript apps.  Supports ES2015 on the client and server-side.
+An application that will aid you in learning the Japanese language developed by Michelle and JR
 
-## Getting started
+[Live Demo](https://japanesex.herokuapp.com/)
 
-### Setting up a project
+![Screenshot](client/assets/spaced-repetition-screenshot1.png)
+![Screenshot](client/assets/spaced-repetition-screenshot2.png)
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/oampo/thinkful-full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+## A little bit about Japanese X
 
-### Working on the project
+Japanese X was developed to help students who are learning Japanese. We used the spaced repetition algorithm to ensure the most suitable learning environment for everyone. The algorithm is fairly simple: if the user answers the question correctly, that question will move back further down the queue, depending on how many times it was answered correctly. If the user answers the question incorrectly, that question will move back only 1 space in the list.
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+## How to use this app
 
-## Directory layout
+* Registering for Japanese X is easy. Simply click `sign in with google`, enter your gmail log in credentials and follow the onscreen instructions.
+* Once you're logged in, you must translate what the Japanese vocabulary word is to English.
+* When you have your Japanese word translated, type your answer in the `English` input field.
+* If you answered the question incorrectly, the algorithm will make sure to ask you that question soon.
 
-```
-.
-├── client      Client-side code
-│   ├── assets  Images, videos, etc.
-│   ├── js      JavaScript
-│   └── scss    SASS stylesheets
-├── server      Server-side code
-└── test        Tests
-    ├── client  Client tests
-    └── server  Server tests
-```
+## API Documentation
 
-## Deployment
+* /api/auth/google: used to log into the application using the google oauth system
+* /api/questions/`userId`: GET the questions returning information that specifically pertains to the user tied to that access token
+* /api/questions/`userId`: POST the weight of each question to the database as the user correctly or incorrectly answers the question
 
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
+## Technical
 
-### Setting up the project on Heroku
+The frontend of this web application is developed using React and Redux. The backend uses Node.js and Mongo to store information the database. Japanese X uses the Google OAuth 2.0 system. This is used to easily log users in using their gmail credentials and store their session in the database. There are 10 total questions stored in the database. Each question has a weight attached to them that decides how many places in the array it will be sent back. For example if a question has a weight of 4, that question will be sent back 4 places. As you answer the next 4 questions, you will see that same question again.
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-* Instruct Heroku to install the development dependencies: `heroku config:set NPM_CONFIG_PRODUCTION=false`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
-
-## Continuous Integration
-
-* Add your repository to [Travis CI](https://travis-ci.org/)
-
-## Continuous Deployment
-
-Requires the [Travis CLI client](https://github.com/travis-ci/travis.rb).
-
-### Setting up CD
-
-* Add the following configuration to `.travis.yml`:
-
-    ```
-    deploy:
-      provider: heroku
-      app: YOUR_HEROKU_APP_NAME
-    ```
-* Add your Heroku API key: `travis encrypt $(heroku auth:token) --add deploy.api_key`
-
-### Deploying using CD
-
-* Push your code to GitHub: `git push origin master`
-
+# Go forth and learn!
