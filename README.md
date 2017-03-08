@@ -27,5 +27,3 @@ Japanese X was developed to help students who are learning Japanese. We used the
 ## Technical
 
 The frontend of this web application is developed using React and Redux. The backend uses Node.js and Mongo to store information the database. Japanese X uses the Google OAuth 2.0 system. This is used to easily log users in using their gmail credentials and store their session in the database. There are 10 total questions stored in the database. Each question has a weight attached to them that decides how many places in the array it will be sent back. For example if a question has a weight of 4, that question will be sent back 4 places. As you answer the next 4 questions, you will see that same question again.
-
-# Go forth and learn!
